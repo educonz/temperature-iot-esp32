@@ -1,0 +1,18 @@
+language: python
+python:
+  - "2.7"
+
+sudo: false
+cache:
+  directories:
+    - "~/.platformio"
+
+install:
+  - pip install -U platformio
+  - platformio lib -g install 306
+  - platformio lib -g install 31
+  - platformio lib -g install 19
+  - platformio update
+
+script:
+  - platformio run
