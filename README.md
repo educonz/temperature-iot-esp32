@@ -1,6 +1,6 @@
 # Tempertature WiFi IoT
 
-[![Build Status](https://travis-ci.org/educonz/jardineiro-wifi-iot.svg?branch=master)](https://travis-ci.org/educonz/jardineiro-wifi-iot)
+[![Build Status](https://travis-ci.org/educonz/temperature-iot-esp32.svg?branch=master)](https://travis-ci.org/educonz/temperature-iot-esp32)
 
 ### Configuração
 
