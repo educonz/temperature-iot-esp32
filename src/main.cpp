@@ -9,6 +9,7 @@ const char *ssid = "YOUR_WIFI";
 const char *password = "YOUR_PASS";
 const char *token = "";
 const char *endPointSiot = "https://test.ws.siot.com/api/v1";
+String idMachine = "";
 
 bool initMachine = false;
 
@@ -199,12 +200,12 @@ void loop()
   if (signal == HIGH && initMachine && delaySaveEncontrado == 0)
   {
     delaySaveEncontrado = 20000;
-    sendHttp("/state/sensor", "{\"idMachine\": \"13\",\"status\": \"active\",\"date\": \"2020-04-01T12:05:20.000Z\",\"message\": \"Sensor ativo\",\"sensorId\": \"scanner\",\"sensor\": \"Scanner\",\"signals\": [{\"signal\": \"detected\",\"value\": true }]}");
+    sendHttp("/state/sensor", "{\"idMachine\":  \""+ idMachine +"\",\"status\": \"active\",\"date\": \"2020-09-01T12:05:20.000Z\",\"message\": \"Sensor ativo\",\"sensorId\": \"scanner\",\"sensor\": \"Scanner\",\"signals\": [{\"signal\": \"detected\",\"value\": true }]}");
   }
 
   delay(1);
   if (delaySaveEncontrado == 1) {
-    sendHttp("/state/sensor", "{\"idMachine\": \"13\",\"status\": \"active\",\"date\": \"2020-04-01T12:05:20.000Z\",\"message\": \"Sensor ativo\",\"sensorId\": \"scanner\",\"sensor\": \"Scanner\",\"signals\": [{\"signal\": \"detected\",\"value\": false }]}");
+    sendHttp("/state/sensor", "{\"idMachine\":  \""+ idMachine +"\",\"status\": \"active\",\"date\": \"2020-09-01T12:05:20.000Z\",\"message\": \"Sensor ativo\",\"sensorId\": \"scanner\",\"sensor\": \"Scanner\",\"signals\": [{\"signal\": \"detected\",\"value\": false }]}");
   }
   if (delaySaveEncontrado > 0){
     delaySaveEncontrado--;
@@ -220,7 +221,7 @@ void loop()
     {
       if (!initMachine)
       {
-        sendHttp("/state/machine", "{\"idMachine\": \"13\",\"operation\": \"Analisar temperatura/umidade\",\"status\": \"active\",\"date\": \"2020-04-01T03:18:20.000Z\",\"message\": \"\"}");
+        sendHttp("/state/machine", "{\"idMachine\": \""+ idMachine +"\",\"operation\": \"Analisar temperatura/umidade\",\"status\": \"active\",\"date\": \"2020-09-01T03:18:20.000Z\",\"message\": \"\"}");
         initMachine = true;
       }
       String temperatureNow = readDHTTemperature().c_str();
@@ -231,7 +232,7 @@ void loop()
         temperatureStatus = "problem";
       }
 
-      sendHttp("/state/sensor", "{\"idMachine\": \"13\",\"status\": \"" + temperatureStatus + "\",\"date\": \"2020-04-01T12:05:20.000Z\",\"message\": \"Sensor ativo\",\"sensorId\": \"temperature\",\"sensor\": \"Temperatura\",\"signals\": [{\"signal\": \"temperature\",\"value\":" + temperatureNow + ",\"unity\": \"ºC\"}]}");
+      sendHttp("/state/sensor", "{\"idMachine\":  \""+ idMachine +"\",\"status\": \"" + temperatureStatus + "\",\"date\": \"2020-09-01T12:05:20.000Z\",\"message\": \"Sensor ativo\",\"sensorId\": \"temperature\",\"sensor\": \"Temperatura\",\"signals\": [{\"signal\": \"temperature\",\"value\":" + temperatureNow + ",\"unity\": \"ºC\"}]}");
 
       String humidityNow = readDHTHumidity().c_str();
       String himidityStatus = "active";
@@ -241,7 +242,7 @@ void loop()
         himidityStatus = "problem";
       }
 
-      sendHttp("/state/sensor", "{\"idMachine\": \"13\",\"status\": \"" + himidityStatus + "\",\"date\": \"2020-04-01T12:05:20.000Z\",\"message\": \"Sensor ativo\",\"sensorId\": \"humidity\",\"sensor\": \"Umidade\",\"signals\": [{\"signal\": \"humidity\",\"value\":" + humidityNow + ",\"unity\": \"%\"}]}");
+      sendHttp("/state/sensor", "{\"idMachine\":  \""+ idMachine +"\",\"status\": \"" + himidityStatus + "\",\"date\": \"2020-09-01T12:05:20.000Z\",\"message\": \"Sensor ativo\",\"sensorId\": \"humidity\",\"sensor\": \"Umidade\",\"signals\": [{\"signal\": \"humidity\",\"value\":" + humidityNow + ",\"unity\": \"%\"}]}");
     }
     else
     {

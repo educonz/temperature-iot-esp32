@@ -16,4 +16,5 @@ Alterar token para integrar com [S.IoT](https://www.konztec.com).
 ```sh
 const char *token = "";
 const char *endPointSiot = "https://test.ws.siot.com/api/v1";
+String idMachine = "";
 ```
