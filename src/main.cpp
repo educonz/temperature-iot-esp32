@@ -221,6 +221,7 @@ void loop()
     {
       if (!initMachine)
       {
+        initMachine = true;
         sendHttp("/state/machine", "{\"idMachine\": \""+ idMachine +"\",\"operation\": \"Analisar temperatura/umidade\",\"status\": \"active\",\"date\": \"\",\"message\": \"\"}");
       }
       String temperatureNow = readDHTTemperature().c_str();
